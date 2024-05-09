@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,12 +5,26 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [activatedTab, setActivatedTab] = useState(false);
+
+  const sections = [
+    { name: "Home", to: "/#banner" },
+    { name: "About", to: "/#about" },
+    { name: "Education", to: "/#education" },
+    { name: "Skills", to: "/#skills" },
+    { name: "Contact Us", to: "/#contact" },
+  ];
+
+  const handleClickedTab = () => {
+    setActivatedTab(true);
+  };
+
   return (
     <AppBar
-      position="static"
+      position="fixed"
       sx={{ backgroundImage: "none", boxShadow: "none" }}
     >
       {/* <IconButton
@@ -30,90 +43,28 @@ export default function Navbar() {
         component="ul"
         variant="ul"
       >
-        <Typography
-          component="li"
-          variant="li"
-          sx={{
-            borderBottom: "1px solid transparent",
-            ":hover": { color: "#ffbd39", borderBottom: "1px solid" },
-          }}
-        >
+        {sections.map((sec, index) => (
           <Typography
-            component="a"
-            variant="a"
-            href="/#banner"
-            sx={{ color: "#fff", ":hover": { color: "#ffbd39" } }}
+            key={index}
+            component="li"
+            variant="li"
+            sx={{
+              borderBottom: "1px solid transparent",
+              color: activatedTab ? "#ffbd39" : "#fff",
+              ":hover": { color: "#ffbd39", borderBottom: "1px solid" },
+            }}
+            onClick={() => handleClickedTab()}
           >
-            Home
+            <Typography
+              component="a"
+              variant="a"
+              href={sec.to}
+              sx={{ color: "#fff", ":hover": { color: "#ffbd39" } }}
+            >
+              {sec.name}
+            </Typography>
           </Typography>
-        </Typography>
-        <Typography
-          component="li"
-          variant="li"
-          sx={{
-            borderBottom: "1px solid transparent",
-            ":hover": { color: "#ffbd39", borderBottom: "1px solid" },
-          }}
-        >
-          <Typography
-            component="a"
-            variant="a"
-            href="/#about"
-            sx={{ color: "#fff", ":hover": { color: "#ffbd39" } }}
-          >
-            About
-          </Typography>
-        </Typography>
-        <Typography
-          component="li"
-          variant="li"
-          sx={{
-            borderBottom: "1px solid transparent",
-            ":hover": { color: "#ffbd39", borderBottom: "1px solid" },
-          }}
-        >
-          <Typography
-            component="a"
-            variant="a"
-            href="/#education"
-            sx={{ color: "#fff", ":hover": { color: "#ffbd39" } }}
-          >
-            Education
-          </Typography>
-        </Typography>
-        <Typography
-          component="li"
-          variant="li"
-          sx={{
-            borderBottom: "1px solid transparent",
-            ":hover": { color: "#ffbd39", borderBottom: "1px solid" },
-          }}
-        >
-          <Typography
-            component="a"
-            variant="a"
-            sx={{ color: "#fff", ":hover": { color: "#ffbd39" } }}
-          >
-            Skills
-          </Typography>
-        </Typography>
-        <Typography
-          component="li"
-          variant="li"
-          sx={{
-            borderBottom: "1px solid transparent",
-            ":hover": { color: "#ffbd39", borderBottom: "1px solid" },
-          }}
-        >
-          <Typography
-            component="a"
-            variant="a"
-            href="/#contact"
-            sx={{ color: "#fff", ":hover": { color: "#ffbd39" } }}
-          >
-            Contact Us
-          </Typography>
-        </Typography>
+        ))}
       </Stack>
     </AppBar>
   );

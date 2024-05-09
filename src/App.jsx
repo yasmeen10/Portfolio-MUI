@@ -5,6 +5,9 @@ import Banner from "./components/Banner";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Resume from "./components/Resume";
+import LinearDeterminate from "./components/LinearDeterminate";
+import CustomizedProgressBars from "./components/LinearDeterminate";
+import Skills from "./components/Skills";
 
 function App() {
   return (
@@ -18,15 +21,16 @@ function App() {
       />
       <Navbar />
       <Stack
-        marginTop={15}
+        marginTop={10}
         direction="column"
         alignItems="center"
         justifyContent="center"
-        spacing={20}
+        spacing={15}
       >
         <Banner />
         <About />
         <Resume />
+        <Skills />
         <Contact />
       </Stack>
     </>
